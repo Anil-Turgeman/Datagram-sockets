@@ -1,24 +1,22 @@
-# Makefile for ex4 Part A
+# Makefile for ex4 Part B
 
-all: recv_udp send_udp
+all: net_client net_server
 
-recv_udp: recv_udp.c
-	gcc -Werror -Wall -Wvla -g recv_udp.c -o recv_udp.o
+net_client: net_client.c
+	gcc -Werror -Wall -Wvla -g net_client.c -o net_client.o
 
-send_udp: send_udp.c
-	gcc -Werror -Wall -Wvla -g send_udp.c -o send_udp.o
+net_server: net_server.c
+	gcc -Werror -Wall -Wvla -g net_server.c -o net_server.o
+
+nslookup: nslookup.c
+	gcc -Werror -Wall -Wvla -g nslookup.c -o nslookup.o
 
 clean:
-	rm -f *.o recv_udp.o send_udp.o
+	rm -f *.o net_client.o net_server.o
 
-runs:
-	./recv_udp.o
+runserver:
+	./net_server.o
 
-runc:
-	./send_udp.o localhost
+runclient:
+	./net_client.o
 
-runs-strace:
-	strace -f ./recv_udp.o
-
-runc-strace:
-	strace -f ./send_udp.o
